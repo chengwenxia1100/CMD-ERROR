@@ -1,0 +1,39 @@
+ 利用JS判断图片，文件是否存在的几种方法
+ 方法一(判断图片是否存在)：
+ function isHasImg(pathImg){  
+    var ImgObj=new Image();  
+    ImgObj.src= pathImg;  
+     if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0))  
+     {  
+       return true;  
+     } else {  
+       return false;  
+    }  
+}
+方法二( AJAX验证图片链接是否存在)：
+ function validateImage(url)  
+    {      
+        var xmlHttp ;  
+        if (window.ActiveXObject)  
+         {  
+          xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");  
+         }  
+         else if (window.XMLHttpRequest)  
+         {  
+          xmlHttp = new XMLHttpRequest();  
+         }   
+        xmlHttp.open("Get",url,false);  
+        xmlHttp.send();  
+        if(xmlHttp.status==404)  
+        return false;  
+        else  
+        return true;  
+    }
+    
+   方法三(用onerror替换不存在的图片):
+    <img src="xx.png" onerror="nofind();"> 
+    function nofind(){ 
+        var img=event.srcElement; 
+        img.src="aa.png"; 
+        img.onerror=null; //控制不要一直跳动
+    } 
